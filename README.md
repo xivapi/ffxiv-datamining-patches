@@ -1,6 +1,6 @@
 # ffxiv-datamining-patches
 
-A complete collection of patch information from **1.23** to the current patch **4.3**/
+A complete collection of patch information from **1.23** to the current patch **4.35**
 
 Some notes:
 
