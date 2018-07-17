@@ -4,11 +4,11 @@ A complete collection of patch information from **1.23** to the current patch **
 
 Some notes:
 
-- Why a bunch of zip files? Because un-zipped the entire size is 3.3GB which is too big for a GitHub repository.
-- 1.23 has a completely different format to 2.0, no information about how these files work can really be provided, have fun :)
-- 2.1 contains recovered files as a extract could not be located. I was able to grab ID's and Names from an early version of XIVDB.
-- Patches: 2.0, 2.2 --> 2.51 formats are similar but use an old data-mining tool that is data, no column headings provided.
-- Patches 2.55 to current use the same extraction tool and should be familiar to the standards of SaintCoinach.
+- Why a bunch of zip files? Because un-zipped the entire size is 3.3 GB.
+- 1.23 structure and format is nothing like 2.0, it's ... wild
+- 2.1 is a "recovered" patch, I cannot find an `exd` extract for 2.1 and have pulled Name+ID from a backup of XIVDB
+- Patches: 2.0, 2.2 --> 2.51 structure is out of date, no column headings provided.
+- Patches 2.55 to current use SaintCoinach `exd` command and should be familar.
 
 The purpose of these is to maintain an historical record. At some point reformat them into a useful data set to provide accuracy patch numbers.
 
