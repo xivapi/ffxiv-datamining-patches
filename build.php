@@ -116,7 +116,7 @@ function reportResults($PatchData, $patchName, $totalRecords, $skippedArray, $sk
 
     write("[{$patchName}] ". count($PatchData) ."/{$totalRecords} Assigned {$skippedRecords}/{$totalRecords} ({$totalSkipped}%) Placeholders");
 
-    if ($totalSkipped > 30) {
+    if ($totalSkipped > 50) {
         write("[{$patchName}] !!! Over 30% of rows were skipped, check the IDs in the CSV just to be sure");
         write("[{$patchName}] !!! You can run this manually via: php build.php {$contentName}");
 
@@ -173,7 +173,7 @@ function handleFile($filename, $patchId, $patchName)
             $contentId = $record[0];
 
             // ignore those below a threshold
-            if (!isPlaceholder($record, $stringColumns)) {
+            if (isPlaceholder($record, $stringColumns)) {
                 $skippedArray[] = $contentId;
                 $skippedRecords++;
                 continue;
@@ -400,7 +400,7 @@ foreach ($PatchList as $data) {
                 $contentId = $record[0];
 
                 // ignore those below a threshold
-                if (!isPlaceholder($record, $stringColumns)) {
+                if (isPlaceholder($record, $stringColumns)) {
                     $skippedArray[] = $contentId;
                     $skippedRecords++;
                     continue;
