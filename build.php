@@ -1,14 +1,15 @@
 <?php
 
 /**
- * This works by going from the latest patch extract and assigning all
- * content the "latest" patch, it will then look for those files in previous
- * patches and if they are found, it will attempt to remove any "placeholder"
- * content and assign that patch, it will keep going down until the file is not found
- * and then that file is complete.
+ * This works by processing the patch values for the most current patch and keeping a record of all "current"
+ * content files. It will then loop through all previous patches and if the file exists + the row then the
+ * previous patch ID is assigned. If the content file is not found for that patch it is removed from the list
+ * and stops updating (completed file)
  *
- * Files that have since deleted are ignored. I don't care about them
+ * The placeholder detection simply removes all characters except for letters in the top 10 string rows and
+ * if any are non-empty it assumes it is a non-placeholder and assigns a patch value.
  *
+ * We can fix any weird ones on a case-by-case basis.
  *
  * PS. This is some major hacky PHP and i don't care, it's just to generate a list once :)
  */
@@ -66,7 +67,7 @@ function getCsvData($filename)
         }
 
         // limit this to 5 because some files (eg Quests) have a fuck ton of str data
-        if (count($stringColumns) == 5) {
+        if (count($stringColumns) == 10) {
             break;
         }
     }
@@ -89,28 +90,22 @@ function saveData($contentName, $data)
 
 function isPlaceholder($record, $stringColumns)
 {
-    // grab all string values
-    $strValues = [];
     foreach ($stringColumns as $i => $index) {
-        // if the index doesn't exist we remove the string column and continue,
-        // the string index is newer than the current file being analysed
+        // If at least 1 string value has characters
         if (!isset($record[$index])) {
             unset($stringColumns[$i]);
             continue;
         }
 
-        $strValues[$index] = trim($record[$index]);
+        $value = trim($record[$index]);
+        $value = preg_replace('/\PL/u', '', $value);
+
+        if (strlen($value) > 1) {
+            return false;
+        }
     }
 
-    // grab the total non empty str count
-    $strValuesNonEmpty = count(array_filter($strValues));
-
-    // work out the percentage of empty str values, the reason we do this is because
-    // sometimes a placeholder will be added with various in-game codes or file names
-    // but missing key names and thus should be considered as not added
-    $percentage = $strValuesNonEmpty == 0 ? 0 : ($strValuesNonEmpty / count($strValues)) * 100;
-
-    return $percentage > 30;
+    return true;
 }
 
 function reportResults($PatchData, $patchName, $totalRecords, $skippedArray, $skippedRecords, $contentName)
@@ -376,7 +371,7 @@ foreach ($PatchList as $data) {
         }
 
         $stringColumns = array_keys($stringColumns);
-        array_splice($stringColumns, 5);
+        array_splice($stringColumns, 10);
 
         // load existing patch data if it exists
         $PatchData = [];
