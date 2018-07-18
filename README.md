@@ -4,7 +4,7 @@ A complete collection of patch information from **1.23** to the current patch **
 
 Some notes:
 
-- Why a bunch of zip files? Because un-zipped the entire size is 2.79 GB.
+- Why a bunch of zip files? Because un-zipped the entire size is 2GB.
 - 1.23 structure and format is nothing like 2.0, it's ... wild
 - 2.1 is a "recovered" patch, I cannot find an `exd` extract for 2.1 and have pulled Name+ID from a backup of XIVDB
 - Patches: 2.0, 2.2 --> 2.51 structure is out of date, no column headings provided.

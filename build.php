@@ -206,6 +206,22 @@ foreach ($PatchList as $data) {
     }
 }
 
+write("Content:");
+$str = "\n";
+foreach (array_chunk(array_keys($ContentList), 4) as $cl) {
+    foreach($cl as $i => $name) {
+        $cl[$i] = str_pad(substr($name, 0, 39), 40, ' ', STR_PAD_RIGHT);
+    }
+
+    $str .= implode(null, $cl) . "\n";
+}
+write($str);
+sleep(5);
+
+//
+// PATCHES 4.32 TO 2.55
+//
+
 write('---[ PROCESSING PATCHES 4.32 > 2.55 ]---');
 $PatchList = [
     # 4.X
@@ -245,18 +261,7 @@ $PatchList = [
     [ 18, '2.55', __DIR__.'/extracts/2.55/exd/' ],
 ];
 
-write("Content:");
-$str = "\n";
-foreach (array_chunk(array_keys($ContentList), 4) as $cl) {
-    foreach($cl as $i => $name) {
-        $cl[$i] = str_pad(substr($name, 0, 39), 40, ' ', STR_PAD_RIGHT);
-    }
-
-    $str .= implode(null, $cl) . "\n";
-}
-write($str);
-sleep(5);
-
+/*
 foreach ($PatchList as $data) {
     [ $patchId, $patchName, $extractFolder] = $data;
     write(":::::::::::::::::::::::::::::::");
@@ -278,5 +283,39 @@ foreach ($PatchList as $data) {
         }
 
         handleFile($filename, $patchId, $patchName);
+    }
+}
+*/
+
+//
+// PATCHES 2.51 - 2.20
+//
+
+$PatchList = [
+    [ 17, '2.51', __DIR__.'/extracts/2.51 - exd/exd/' ],
+    [ 16, '2.50', __DIR__.'/extracts/2.50 - exd/exd/' ],
+    [ 15, '2.45', __DIR__.'/extracts/2.45 - exd/exd/' ],
+    [ 14, '2.40', __DIR__.'/extracts/2.40 - exd/exd/' ],
+    [ 13, '2.38', __DIR__.'/extracts/2.38 - exd/exd/' ],
+    [ 12, '2.35', __DIR__.'/extracts/2.35 - exd/exd/' ],
+    [ 11, '2.30', __DIR__.'/extracts/2.30 - exd/exd/' ],
+    [ 10, '2.28', __DIR__.'/extracts/2.28 - exd/exd/' ],
+    [ 9, '2.25', __DIR__.'/extracts/2.25 - exd/exd/' ],
+    [ 8, '2.20', __DIR__.'/extracts/2.20 - exd/exd/' ],
+];
+
+foreach ($PatchList as $data) {
+    [ $patchId, $patchName, $extractFolder] = $data;
+    write(":::::::::::::::::::::::::::::::");
+    write("[{$patchName}] :: START ". count($ContentList) ." CONTENT REMAIN ::");
+    write(":::::::::::::::::::::::::::::::");
+
+    if (!$ContentList) {
+        write("[{$patchName}] No more content data?");
+        die;
+    }
+
+    foreach ($ContentList as $contentName => $state) {
+        $filename = "{$extractFolder}{$contentName}.exd";
     }
 }
