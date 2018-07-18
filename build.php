@@ -8,6 +8,9 @@
  * and then that file is complete.
  *
  * Files that have since deleted are ignored. I don't care about them
+ *
+ *
+ * PS. This is some major hacky PHP and i don't care, it's just to generate a list once :)
  */
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -80,7 +83,7 @@ function saveData($contentName, $data)
 {
     file_put_contents(
         __DIR__.'/patchdata/'. $contentName .'.json',
-        json_encode($data, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK)
+        json_encode($data, JSON_PRETTY_PRINT)
     );
 }
 
@@ -88,7 +91,14 @@ function isPlaceholder($record, $stringColumns)
 {
     // grab all string values
     $strValues = [];
-    foreach ($stringColumns as $index) {
+    foreach ($stringColumns as $i => $index) {
+        // if the index doesn't exist we remove the string column and continue,
+        // the string index is newer than the current file being analysed
+        if (!isset($record[$index])) {
+            unset($stringColumns[$i]);
+            continue;
+        }
+
         $strValues[$index] = trim($record[$index]);
     }
 
@@ -142,7 +152,7 @@ function handleFile($filename, $patchId, $patchName)
 
     $PatchData = [];
 
-    // load existing patch data id it is there
+    // load existing patch data if it exists
     if (file_exists(__DIR__.'/patchdata/'. $contentName .'.json')) {
         $PatchData = json_decode(
             file_get_contents(__DIR__.'/patchdata/'. $contentName .'.json'),
@@ -216,7 +226,10 @@ foreach (array_chunk(array_keys($ContentList), 4) as $cl) {
     $str .= implode(null, $cl) . "\n";
 }
 write($str);
-sleep(5);
+
+write("Staring in 3..."); sleep(1);
+write("Staring in 2..."); sleep(1);
+write("Staring in 1..."); sleep(1);
 
 //
 // PATCHES 4.32 TO 2.55
@@ -261,7 +274,6 @@ $PatchList = [
     [ 18, '2.55', __DIR__.'/extracts/2.55/exd/' ],
 ];
 
-/*
 foreach ($PatchList as $data) {
     [ $patchId, $patchName, $extractFolder] = $data;
     write(":::::::::::::::::::::::::::::::");
@@ -278,6 +290,7 @@ foreach ($PatchList as $data) {
         $filename = "{$extractFolder}{$contentName}.csv";
 
         if (!file_exists($filename)) {
+            write("[{$patchName}] {$contentName} not part of this patch, added in next patch");
             unset($ContentList[$contentName]);
             continue;
         }
@@ -285,11 +298,18 @@ foreach ($PatchList as $data) {
         handleFile($filename, $patchId, $patchName);
     }
 }
-*/
 
 //
 // PATCHES 2.51 - 2.20
 //
+
+write('---------------------------------------------------------');
+write('');
+write('Processing older patches');
+write('');
+write('---------------------------------------------------------');
+
+write('---[ PROCESSING PATCHES 2.51 > 2.2 ]---');
 
 $PatchList = [
     [ 17, '2.51', __DIR__.'/extracts/2.51 - exd/exd/' ],
@@ -302,6 +322,12 @@ $PatchList = [
     [ 10, '2.28', __DIR__.'/extracts/2.28 - exd/exd/' ],
     [ 9, '2.25', __DIR__.'/extracts/2.25 - exd/exd/' ],
     [ 8, '2.20', __DIR__.'/extracts/2.20 - exd/exd/' ],
+    // 7 - 2.16 missing
+    // 6 - 2.15 missing
+    // 5 - 2.1b missing
+    // 4 - 2.10 missing (dodgy, done after)
+    // 3 - 2.05 missing
+    [ 2, '2.0', __DIR__.'/extracts/2.0 - exd/exd/' ],
 ];
 
 foreach ($PatchList as $data) {
@@ -315,7 +341,81 @@ foreach ($PatchList as $data) {
         die;
     }
 
+    // loop through content
     foreach ($ContentList as $contentName => $state) {
+        write("[{$patchName}] CSV {$contentName}");
         $filename = "{$extractFolder}{$contentName}.exd";
+
+        // skip if not forced
+        if ($forceContentName && $forceContentName != $contentName) {
+            continue;
+        }
+
+        // file does not exist, was added after this patch
+        if (!file_exists($filename)) {
+            write("[{$patchName}] {$contentName} not part of this patch, added in next patch");
+            unset($ContentList[$contentName]);
+            continue;
+        }
+
+        // get CSV records
+        $csv = Reader::createFromPath($filename);
+        $csvRecords = (new Statement())->offset(0)->process($csv)->getRecords();
+
+        // find string columns throughout the entire system using the hack {{{STRING}}} placeholder
+        // we only care about the first 5 string values
+        $stringColumns = [];
+        $csvArray = [];
+        foreach ($csvRecords as $record) {
+            $csvArray[] = $record;
+            foreach ($record as $index => $value) {
+                if (stripos($value, '{{{STRING}}}') !== false) {
+                    $stringColumns[$index] = true;
+                }
+            }
+        }
+
+        $stringColumns = array_keys($stringColumns);
+        array_splice($stringColumns, 5);
+
+        // load existing patch data if it exists
+        $PatchData = [];
+        if (file_exists(__DIR__.'/patchdata/'. $contentName .'.json')) {
+            $PatchData = json_decode(
+                file_get_contents(__DIR__.'/patchdata/'. $contentName .'.json'),
+                true
+            );
+        }
+
+        $skippedArray = [];
+        $skippedRecords = 0;
+        $totalRecords = 0;
+
+        // if no str columns, this is a data file, just handle it as existing in this patch
+        if (!$stringColumns) {
+            foreach($csvArray as $i => $record) {
+                $totalRecords++;
+                $contentId = $record[0];
+                $PatchData[$contentId] = $patchId;
+            }
+        } else {
+            // detect if placeholder or not
+            foreach($csvArray as $i => $record) {
+                $totalRecords++;
+                $contentId = $record[0];
+
+                // ignore those below a threshold
+                if (!isPlaceholder($record, $stringColumns)) {
+                    $skippedArray[] = $contentId;
+                    $skippedRecords++;
+                    continue;
+                }
+
+                $PatchData[$contentId] = $patchId;
+            }
+        }
+
+        reportResults($PatchData, $patchName, $totalRecords, $skippedArray, $skippedRecords, $contentName);
+        saveData($contentName, $PatchData);
     }
 }
