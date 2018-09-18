@@ -1,6 +1,6 @@
 # ffxiv-datamining-patches
 
-A complete collection of patch information from **1.23** to the current patch **4.35**
+A complete collection of patch information from **1.23** to the current patch **4.4**
 
 Some notes:
 
@@ -70,6 +70,7 @@ Only root data is included, the following folders are not included:
 4.3
 4.31
 4.35
+4.4
 ```
 
 ## Patch builder list
