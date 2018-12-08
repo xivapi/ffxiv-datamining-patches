@@ -193,7 +193,7 @@ function handleFile($filename, $patchId, $patchName)
 
 $ContentList = [];
 $PatchList = [
-    [ 47, '4.35', __DIR__.'/extracts/4.35/exd/' ]
+    [ 51, '4.45', __DIR__.'/extracts/4.45/exd/' ],
 ];
 
 write('---[ PROCESSING TOP PATCH ]---');
@@ -227,12 +227,17 @@ write("Staring in 2..."); sleep(1);
 write("Staring in 1..."); sleep(1);
 
 //
-// PATCHES 4.32 TO 2.55
+// PATCHES 4.41 TO 2.55
 //
 
-write('---[ PROCESSING PATCHES 4.32 > 2.55 ]---');
+write('---[ PROCESSING PATCHES 4.41 > 2.55 ]---');
 $PatchList = [
     # 4.X
+    //[ 51, '4.45', __DIR__.'/extracts/4.45/exd/' ],
+    [ 50, '4.41', __DIR__.'/extracts/4.41/exd/' ],
+    [ 49, '4.4', __DIR__.'/extracts/4.4/exd/' ],
+    // no extract for 4.36
+    [ 47, '4.35', __DIR__.'/extracts/4.35/exd/' ],
     [ 46, '4.31', __DIR__.'/extracts/4.31/exd/' ],
     [ 45, '4.3', __DIR__.'/extracts/4.3/exd/' ],
     [ 44, '4.25', __DIR__.'/extracts/4.25/exd/' ],
@@ -317,12 +322,12 @@ $PatchList = [
     [ 10, '2.28', __DIR__.'/extracts/2.28 - exd/exd/' ],
     [ 9, '2.25', __DIR__.'/extracts/2.25 - exd/exd/' ],
     [ 8, '2.20', __DIR__.'/extracts/2.20 - exd/exd/' ],
+    [ 4, '2.10', __DIR__.'/extracts/2.10 - exd/exd/' ],
     // 7 - 2.16 missing
     // 6 - 2.15 missing
     // 5 - 2.1b missing
-    // 4 - 2.10 missing (dodgy, done after)
     // 3 - 2.05 missing
-    [ 2, '2.0', __DIR__.'/extracts/2.0 - exd/exd/' ],
+    [ 2, '2.0', __DIR__.'/extracts/2.00 - exd/exd/' ],
 ];
 
 foreach ($PatchList as $data) {
@@ -399,8 +404,8 @@ foreach ($PatchList as $data) {
                 $totalRecords++;
                 $contentId = $record[0];
 
-                // ignore those below a threshold
-                if (isPlaceholder($record, $stringColumns)) {
+                // ignore those below a threshold, unless the patch is 2 then it's 2.0!
+                if (isPlaceholder($record, $stringColumns) && $patchId !== 2) {
                     $skippedArray[] = $contentId;
                     $skippedRecords++;
                     continue;
