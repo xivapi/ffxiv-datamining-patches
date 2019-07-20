@@ -7,10 +7,23 @@ namespace Composer\Autoload;
 class ComposerStaticInite38474daa009b550ddaa36f62c16cadd
 {
     public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php73\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\Console\\' => 26,
+        ),
+        'P' => 
+        array (
+            'Psr\\Container\\' => 14,
+        ),
         'L' => 
         array (
             'League\\Csv\\' => 11,
@@ -18,10 +31,34 @@ class ComposerStaticInite38474daa009b550ddaa36f62c16cadd
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Contracts\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'League\\Csv\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
         ),
+    );
+
+    public static $classMap = array (
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -29,6 +66,7 @@ class ComposerStaticInite38474daa009b550ddaa36f62c16cadd
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInite38474daa009b550ddaa36f62c16cadd::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInite38474daa009b550ddaa36f62c16cadd::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite38474daa009b550ddaa36f62c16cadd::$classMap;
 
         }, null, ClassLoader::class);
     }

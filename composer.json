@@ -1,5 +1,6 @@
 {
     "require": {
-        "league/csv": "^9.0"
+        "league/csv": "^9.0",
+        "symfony/console": "^4.3"
     }
 }

@@ -232,46 +232,54 @@ write("Staring in 1..."); sleep(1);
 
 write('---[ PROCESSING PATCHES 4.41 > 2.55 ]---');
 $PatchList = [
+    # 5.X
+    [ 59, '5.01', __DIR__.'/extracts/5.01/' ],
+    [ 58, '5.0', __DIR__.'/extracts/5.0/' ],
     # 4.X
-    //[ 51, '4.45', __DIR__.'/extracts/4.45/exd/' ],
-    [ 50, '4.41', __DIR__.'/extracts/4.41/exd/' ],
-    [ 49, '4.4', __DIR__.'/extracts/4.4/exd/' ],
+    [ 57, '4.58', __DIR__.'/extracts/4.58/' ],
+    [ 56, '4.57', __DIR__.'/extracts/4.57/' ],
+    [ 55, '4.56', __DIR__.'/extracts/4.56/' ],
+    [ 54, '4.55', __DIR__.'/extracts/4.55/' ],
+    [ 52, '4.5', __DIR__.'/extracts/4.5/' ],
+    [ 51, '4.45', __DIR__.'/extracts/4.45/' ],
+    [ 50, '4.41', __DIR__.'/extracts/4.41/' ],
+    [ 49, '4.4', __DIR__.'/extracts/4.4/' ],
     // no extract for 4.36
-    [ 47, '4.35', __DIR__.'/extracts/4.35/exd/' ],
-    [ 46, '4.31', __DIR__.'/extracts/4.31/exd/' ],
-    [ 45, '4.3', __DIR__.'/extracts/4.3/exd/' ],
-    [ 44, '4.25', __DIR__.'/extracts/4.25/exd/' ],
-    [ 43, '4.2', __DIR__.'/extracts/4.2/exd/' ],
-    [ 42, '4.15', __DIR__.'/extracts/4.15/exd/' ],
-    [ 41, '4.11', __DIR__.'/extracts/4.11/exd/' ],
-    [ 40, '4.1', __DIR__.'/extracts/4.1/exd/' ],
+    [ 47, '4.35', __DIR__.'/extracts/4.35/' ],
+    [ 46, '4.31', __DIR__.'/extracts/4.31/' ],
+    [ 45, '4.3', __DIR__.'/extracts/4.3/' ],
+    [ 44, '4.25', __DIR__.'/extracts/4.25/' ],
+    [ 43, '4.2', __DIR__.'/extracts/4.2/' ],
+    [ 42, '4.15', __DIR__.'/extracts/4.15/' ],
+    [ 41, '4.11', __DIR__.'/extracts/4.11/' ],
+    [ 40, '4.1', __DIR__.'/extracts/4.1/' ],
     // id 39 patch 4.06 missing, i do not think anything useful was in it
-    [ 38, '4.05', __DIR__.'/extracts/4.05/exd/' ],
-    [ 37, '4.01', __DIR__.'/extracts/4.01/exd/' ],
-    [ 36, '4.0', __DIR__.'/extracts/4.0/exd/' ],
+    [ 38, '4.05', __DIR__.'/extracts/4.05/' ],
+    [ 37, '4.01', __DIR__.'/extracts/4.01/' ],
+    [ 36, '4.0', __DIR__.'/extracts/4.0/' ],
 
     # 3.X
-    [ 35, '3.56', __DIR__.'/extracts/3.56/exd/' ],
-    [ 34, '3.55b', __DIR__.'/extracts/3.55b/exd/' ],
-    [ 33, '3.55a', __DIR__.'/extracts/3.55a/exd/' ],
-    [ 32, '3.5', __DIR__.'/extracts/3.5/exd/' ],
-    [ 31, '3.45', __DIR__.'/extracts/3.45/exd/' ],
-    [ 30, '3.4', __DIR__.'/extracts/3.4/exd/' ],
+    [ 35, '3.56', __DIR__.'/extracts/3.56/' ],
+    [ 34, '3.55b', __DIR__.'/extracts/3.55b/' ],
+    [ 33, '3.55a', __DIR__.'/extracts/3.55a/' ],
+    [ 32, '3.5', __DIR__.'/extracts/3.5/' ],
+    [ 31, '3.45', __DIR__.'/extracts/3.45/' ],
+    [ 30, '3.4', __DIR__.'/extracts/3.4/' ],
 
     // id 29 is missing in XIVDB patch list, maybe there is another 3.3X patch
-    [ 28, '3.35', __DIR__.'/extracts/3.35/exd/' ],
-    [ 27, '3.3', __DIR__.'/extracts/3.3/exd/' ],
-    [ 26, '3.25', __DIR__.'/extracts/3.25/exd/' ],
-    [ 25, '3.2', __DIR__.'/extracts/3.2/exd/' ],
-    [ 24, '3.15', __DIR__.'/extracts/3.15/exd/' ],
-    [ 23, '3.1', __DIR__.'/extracts/3.1/exd/' ],
-    [ 22, '3.07', __DIR__.'/extracts/3.07/exd/' ],
-    [ 21, '3.05', __DIR__.'/extracts/3.05/exd/' ],
-    [ 20, '3.01', __DIR__.'/extracts/3.01/exd/' ],
-    [ 19, '3.0', __DIR__.'/extracts/3.0/exd/' ],
+    [ 28, '3.35', __DIR__.'/extracts/3.35/' ],
+    [ 27, '3.3', __DIR__.'/extracts/3.3/' ],
+    [ 26, '3.25', __DIR__.'/extracts/3.25/' ],
+    [ 25, '3.2', __DIR__.'/extracts/3.2/' ],
+    [ 24, '3.15', __DIR__.'/extracts/3.15/' ],
+    [ 23, '3.1', __DIR__.'/extracts/3.1/' ],
+    [ 22, '3.07', __DIR__.'/extracts/3.07/' ],
+    [ 21, '3.05', __DIR__.'/extracts/3.05/' ],
+    [ 20, '3.01', __DIR__.'/extracts/3.01/' ],
+    [ 19, '3.0', __DIR__.'/extracts/3.0/' ],
 
     # 2.X
-    [ 18, '2.55', __DIR__.'/extracts/2.55/exd/' ],
+    [ 18, '2.55', __DIR__.'/extracts/2.55/' ],
 ];
 
 foreach ($PatchList as $data) {
@@ -312,22 +320,18 @@ write('---------------------------------------------------------');
 write('---[ PROCESSING PATCHES 2.51 > 2.2 ]---');
 
 $PatchList = [
-    [ 17, '2.51', __DIR__.'/extracts/2.51 - exd/exd/' ],
-    [ 16, '2.50', __DIR__.'/extracts/2.50 - exd/exd/' ],
-    [ 15, '2.45', __DIR__.'/extracts/2.45 - exd/exd/' ],
-    [ 14, '2.40', __DIR__.'/extracts/2.40 - exd/exd/' ],
-    [ 13, '2.38', __DIR__.'/extracts/2.38 - exd/exd/' ],
-    [ 12, '2.35', __DIR__.'/extracts/2.35 - exd/exd/' ],
-    [ 11, '2.30', __DIR__.'/extracts/2.30 - exd/exd/' ],
-    [ 10, '2.28', __DIR__.'/extracts/2.28 - exd/exd/' ],
-    [ 9, '2.25', __DIR__.'/extracts/2.25 - exd/exd/' ],
-    [ 8, '2.20', __DIR__.'/extracts/2.20 - exd/exd/' ],
-    [ 4, '2.10', __DIR__.'/extracts/2.10 - exd/exd/' ],
-    // 7 - 2.16 missing
-    // 6 - 2.15 missing
-    // 5 - 2.1b missing
-    // 3 - 2.05 missing
-    [ 2, '2.0', __DIR__.'/extracts/2.00 - exd/exd/' ],
+    [ 17, '2.51', __DIR__.'/extracts/2.51/' ],
+    [ 16, '2.50', __DIR__.'/extracts/2.50/' ],
+    [ 15, '2.45', __DIR__.'/extracts/2.45/' ],
+    [ 14, '2.40', __DIR__.'/extracts/2.40/' ],
+    [ 13, '2.38', __DIR__.'/extracts/2.38/' ],
+    [ 12, '2.35', __DIR__.'/extracts/2.35/' ],
+    [ 11, '2.30', __DIR__.'/extracts/2.30/' ],
+    [ 10, '2.28', __DIR__.'/extracts/2.28/' ],
+    [ 9, '2.25', __DIR__.'/extracts/2.25/' ],
+    [ 8, '2.20', __DIR__.'/extracts/2.20/' ],
+    [ 4, '2.10', __DIR__.'/extracts/2.10/' ],
+    [ 2, '2.0', __DIR__.'/extracts/2.00/' ],
 ];
 
 foreach ($PatchList as $data) {
