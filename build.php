@@ -188,12 +188,13 @@ function handleFile($filename, $patchId, $patchName)
 }
 
 //
-// MAIN PATCH, this decides which pieces of content we car eabout
+// MAIN PATCH, this decides which pieces of content we care about
+// this should always be the latest patchdata
 //
 
 $ContentList = [];
 $PatchList = [
-    [ 51, '4.45', __DIR__.'/extracts/4.45/exd/' ],
+    [ 59, '5.01', __DIR__.'/extracts/5.01/' ],
 ];
 
 write('---[ PROCESSING TOP PATCH ]---');

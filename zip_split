@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+split extracts.zip -b 40M extract_chunks

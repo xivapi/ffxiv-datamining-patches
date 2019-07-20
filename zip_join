@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+cat extract_chunks* > extracts.zip
