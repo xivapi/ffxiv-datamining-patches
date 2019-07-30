@@ -194,7 +194,7 @@ function handleFile($filename, $patchId, $patchName)
 
 $ContentList = [];
 $PatchList = [
-    [ 59, '5.01', __DIR__.'/extracts/5.01/' ],
+    [ 60, '5.05', __DIR__.'/extracts/5.05/' ],
 ];
 
 write('---[ PROCESSING TOP PATCH ]---');
@@ -234,6 +234,7 @@ write("Staring in 1..."); sleep(1);
 write('---[ PROCESSING PATCHES 4.41 > 2.55 ]---');
 $PatchList = [
     # 5.X
+    [ 60, '5.05', __DIR__.'/extracts/5.05/' ],
     [ 59, '5.01', __DIR__.'/extracts/5.01/' ],
     [ 58, '5.0', __DIR__.'/extracts/5.0/' ],
     # 4.X
