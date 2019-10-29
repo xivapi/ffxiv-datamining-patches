@@ -13,6 +13,8 @@ $allrawexds = [
     __DIR__.'/extracts/5.0',
     __DIR__.'/extracts/5.01',
     __DIR__.'/extracts/5.05',
+    __DIR__.'/extracts/5.08',
+    __DIR__.'/extracts/5.1',
 ];
 
 foreach ($allrawexds as $directory) {
