@@ -194,7 +194,7 @@ function handleFile($filename, $patchId, $patchName)
 
 $ContentList = [];
 $PatchList = [
-    [ 64, '5.15', __DIR__.'/extracts/5.15/' ],
+    [ 65, '5.18', __DIR__.'/extracts/5.18/' ],
 ];
 
 write('---[ PROCESSING TOP PATCH ]---');

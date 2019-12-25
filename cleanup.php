@@ -5,7 +5,7 @@
  */
 
 $allrawexds = [
-    __DIR__.'/extracts/5.15',
+    __DIR__.'/extracts/5.18',
 ];
 
 foreach ($allrawexds as $directory) {
