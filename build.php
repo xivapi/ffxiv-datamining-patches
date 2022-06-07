@@ -181,7 +181,6 @@ function handleFile($filename, $patchId, $patchName)
 //
 // MAIN PATCH, this decides which pieces of content we care about
 // this should always be the latest patchdata
-//
 
 $ContentList = [];
 $PatchList = [
@@ -231,6 +230,7 @@ if ($full) {
     $PatchList = [
         # 5.X
         [80, '6.1', __DIR__ . '/extracts/6.1/'],
+];
         [79, '6.05', __DIR__ . '/extracts/6.05/'],
         [78, '6.01', __DIR__ . '/extracts/6.01/'],
         [77, '6.0', __DIR__ . '/extracts/6.0/'],
