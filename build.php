@@ -184,7 +184,7 @@ function handleFile($filename, $patchId, $patchName)
 
 $ContentList = [];
 $PatchList = [
-    [90, '6.48', __DIR__ . '/extracts/6.48/'],
+    [91, '6.5', __DIR__ . '/extracts/6.5/'],
 ];
 
 write('---[ PROCESSING TOP PATCH ]---');
@@ -228,6 +228,7 @@ if ($full) {
 
     write('---[ PROCESSING PATCHES Latest > 2.55 ]---');
     $PatchList = [
+        [90, '6.48', __DIR__ . '/extracts/6.48/'],
         [89, '6.45', __DIR__ . '/extracts/6.45/'],
         [88, '6.4', __DIR__ . '/extracts/6.4/'],
         [87, '6.35', __DIR__ . '/extracts/6.35/'],
