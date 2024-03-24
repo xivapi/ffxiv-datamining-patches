@@ -184,8 +184,30 @@ function handleFile($filename, $patchId, $patchName)
 
 $ContentList = [];
 $PatchList = [
-    [91, '6.5', __DIR__ . '/extracts/6.5/'],
+    [93, '6.58', __DIR__ . '/extracts/6.58/'],
 ];
+
+write('---[ CLEANUP ]---');
+
+foreach ($PatchList as $data) {
+    [$patchId, $patchName, $directory] = $data;
+    $files = scandir($directory);
+    
+    foreach ($files as $file) {
+        // remove german, french and japanese
+        if (stripos($file, '.de.csv') !== false || stripos($file, '.fr.csv') !== false || stripos($file, '.ja.csv') !== false) {
+            unlink($directory .'/'. $file);
+        }
+        
+        // rename english to normal
+        if (stripos($file, '.en.csv') !== false) {
+            rename(
+                $directory .'/'. $file,
+                $directory .'/'. str_ireplace('.en.csv', '.csv', $file)
+            );
+        }
+    }
+}
 
 write('---[ PROCESSING TOP PATCH ]---');
 foreach ($PatchList as $data) {
@@ -228,6 +250,9 @@ if ($full) {
 
     write('---[ PROCESSING PATCHES Latest > 2.55 ]---');
     $PatchList = [
+        [93, '6.55', __DIR__ . '/extracts/6.55/'],
+        [92, '6.51', __DIR__ . '/extracts/6.51/'],
+        [91, '6.5', __DIR__ . '/extracts/6.5/'],
         [90, '6.48', __DIR__ . '/extracts/6.48/'],
         [89, '6.45', __DIR__ . '/extracts/6.45/'],
         [88, '6.4', __DIR__ . '/extracts/6.4/'],
