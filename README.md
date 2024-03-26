@@ -1,36 +1,17 @@
 # ffxiv-datamining-patches
 
-A complete collection of patch information from **1.23** to the current patch **5.01**. The purpose of these is to maintain an historical record. At some point reformat them into a useful data set to provide accuracy patch numbers.
+A complete collection of patch information from **1.23** to the current patch. The purpose of these is to maintain an historical record. At some point reformat them into a useful data set to provide accuracy patch numbers.
 
-Some notes:
+## Adding a new patch entry
 
-- Why a bunch of zip files? Because un-zipped the entire size is 2+ GB.
-- 1.23 structure and format is nothing like 2.0, it's ... wild
+In order to update content, you need to run this on each patch, after client files update has been done.
 
-## Extract/Zip the files
+After having installed deps with `yarn`, simply do:
 
-- Split Files: `bash zip_split`
-- Join Files: `bash zip_join`
-- Extract `extract.zip` as normal to /extracts
-  - Folder example: `ffxiv-datamining-patches\extracts\2.00\Achievement.exd`
-- Zip: `php zipup.php`
-
-## Patch builder list
-
-A `build.php` file is included which will run through all patches from top to bottom and build a very accurate patch list for each piece of content. It starts on the latest patch and then finds the files in previous patches until no more found (the file is new that patch), it will attempt to remove placeholders basic on a 30% probability of 5 string values being empty.
-
-> You need to run install composer libraries: `composer install` - the vendor is included in the repo
-
-You can run it as:
-
-```bash
-php build.php
+```shell
+yarn start
 ```
 
-If you want to run the build for a specific piece of content, add that as an argument, eg:
+It'll prompt for a new patch to be added, which you can refuse if you did add one (which is **the recommended way on expansions since you need to set new expansion name and version**). If you said yes, version number will be asked.
 
-```bash
-php build.php Achievement
-```
-
-
+Extraction takes few seconds and will update files in `patchdata/${sheetName}.json`.

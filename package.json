@@ -1,0 +1,21 @@
+{
+  "name": "ffxiv-datamining-patches",
+  "version": "1.0.0",
+  "repository": "https://github.com/xivapi/ffxiv-datamining-patches.git",
+  "author": "Flavien Normand <contact@flavien-normand.fr>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "yarn build && node main.js"
+  },
+  "dependencies": {
+    "@kobold/core": "^0.0.2",
+    "@kobold/excel": "^0.0.6",
+    "@kobold/xiv": "^0.0.2",
+    "enquirer": "^2.4.1",
+    "progress": "^2.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.3"
+  }
+}
