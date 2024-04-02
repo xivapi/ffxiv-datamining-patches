@@ -26,7 +26,7 @@ function generateSheetClass(sheetName: string) {
 }
 
 (async () => {
-    const shouldCreatePatchEntry = await prompt(
+    const shouldCreatePatchEntry: { createPatch: boolean } = await prompt(
         {
             type: 'confirm',
             name: 'createPatch',
@@ -35,8 +35,13 @@ function generateSheetClass(sheetName: string) {
     );
 
     let currentPatch = PatchList[PatchList.length - 1];
+    const gamever = readFileSync(`C:\\Program Files (x86)\\SquareEnix\\FINAL FANTASY XIV - A Realm Reborn\\game\\ffxivgame.ver`, 'utf8');
 
-    if (shouldCreatePatchEntry) {
+    if (gamever === (currentPatch as any).Gamever) {
+        console.error('Gamever did not change, forgot to update client?');
+    }
+
+    if (shouldCreatePatchEntry.createPatch) {
         const patchParams: { version: string, releaseDate: string } = await prompt([
             {
                 type: 'input',
@@ -57,6 +62,8 @@ function generateSheetClass(sheetName: string) {
             "Name_de": `Patch ${patchParams.version}`,
             "Name_cn": `Patch ${patchParams.version}`,
             "Name_kr": `Patch ${patchParams.version}`,
+            // TODO Make this from kobold's path or export this info from kobold itself
+            "Gamever": gamever,
             "PatchNotes_de": "",
             "PatchNotes_en": "",
             "PatchNotes_fr": "",
