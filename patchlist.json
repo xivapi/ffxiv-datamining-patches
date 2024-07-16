@@ -1695,5 +1695,26 @@
         "PatchNotes_ja": "",
         "ReleaseDate": 1719565205,
         "Version": "7.0"
+    },
+    {
+        "Banner": null,
+        "ID": 96,
+        "Url": "/patch+7.01",
+        "ExVersion": 5,
+        "ExName": "Dawntrail",
+        "IsExpansion": false,
+        "Name_ja": "Patch 7.01",
+        "Name_en": "Patch 7.01",
+        "Name_fr": "Patch 7.01",
+        "Name_de": "Patch 7.01",
+        "Name_cn": "Patch 7.01",
+        "Name_kr": "Patch 7.01",
+        "Gamever": "2024.07.10.0001.0000",
+        "PatchNotes_de": "",
+        "PatchNotes_en": "",
+        "PatchNotes_fr": "",
+        "PatchNotes_ja": "",
+        "ReleaseDate": 1721117376,
+        "Version": "7.01"
     }
 ]
