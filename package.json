@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@kobold/core": "^0.0.2",
-    "@kobold/excel": "^0.0.6",
+    "@kobold/excel": "^0.0.8",
     "@kobold/xiv": "^0.0.2",
     "enquirer": "^2.4.1",
     "progress": "^2.0.3"
