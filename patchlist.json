@@ -1842,5 +1842,26 @@
         "PatchNotes_ja": "",
         "ReleaseDate": 1745777444,
         "Version": "7.21"
+    },
+    {
+        "Banner": null,
+        "ID": 103,
+        "Url": "/patch+7.3",
+        "ExVersion": 5,
+        "ExName": "Dawntrail",
+        "IsExpansion": false,
+        "Name_ja": "Patch 7.3",
+        "Name_en": "Patch 7.3",
+        "Name_fr": "Patch 7.3",
+        "Name_de": "Patch 7.3",
+        "Name_cn": "Patch 7.3",
+        "Name_kr": "Patch 7.3",
+        "Gamever": "2025.07.30.0000.0000",
+        "PatchNotes_de": "",
+        "PatchNotes_en": "",
+        "PatchNotes_fr": "",
+        "PatchNotes_ja": "",
+        "ReleaseDate": 1754377656,
+        "Version": "7.3"
     }
 ]
