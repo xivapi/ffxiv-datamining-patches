@@ -1968,5 +1968,26 @@
         "PatchNotes_ja": "",
         "ReleaseDate": 1788852416,
         "Version": "7.56"
+    },
+    {
+        "Banner": null,
+        "ID": 109,
+        "Url": "/patch+7.57",
+        "ExVersion": 5,
+        "ExName": "Dawntrail",
+        "IsExpansion": false,
+        "Name_ja": "Patch 7.57",
+        "Name_en": "Patch 7.57",
+        "Name_fr": "Patch 7.57",
+        "Name_de": "Patch 7.57",
+        "Name_cn": "Patch 7.57",
+        "Name_kr": "Patch 7.57",
+        "Gamever": "2026.10.06.0000.0000",
+        "PatchNotes_de": "",
+        "PatchNotes_en": "",
+        "PatchNotes_fr": "",
+        "PatchNotes_ja": "",
+        "ReleaseDate": 1791895156,
+        "Version": "7.57"
     }
 ]
